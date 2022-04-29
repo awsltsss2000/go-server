@@ -1,0 +1,27 @@
+# 运行模式(debug:调试,test:测试,release:正式)
+runMode: debug
+
+server:
+  host:
+  port: 8080
+
+gorm:
+  # 设置空闲连接池中的最大连接数
+  maxIdleConns: 30
+  # 设置数据库的最大打开连接数
+  maxOpenConns: 150
+  # 设置连接可以重用的最长时间(单位：秒)
+  maxLifetime: 7200
+
+postgres:
+  driver: postgres
+  dsn: "user=yang password=yang host=localhost port=5432 dbname=untitled sslmode=disable"
+  reads:
+    - "user=yang password=yang host=localhost port=5432 dbname=untitled sslmode=disable"
+
+redis:
+  address: "127.0.0.1:6379"
+  password: ""
+  maxIdle: 10
+  maxActive: 30
+  idleTimeout: 200
