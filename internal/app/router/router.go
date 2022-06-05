@@ -7,7 +7,7 @@ import (
 )
 
 type Router struct {
-	UserApi *api.UserAPi
+	UserApi *api.UserApi
 }
 
 func (r *Router) RegisterAPI(app *gin.Engine) {

@@ -58,6 +58,6 @@ func InitConfig() {
 	// })
 }
 
-func GetConfig() Config {
-	return *config
+func GetConfig() *Config {
+	return config
 }

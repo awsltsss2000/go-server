@@ -1,5 +1,5 @@
 # 运行模式(debug:调试,test:测试,release:正式)
-runMode: release
+runMode: "release"
 
 server:
   host:
@@ -14,7 +14,7 @@ gorm:
   maxLifetime: 7200
 
 postgres:
-  driver: postgres
+  driver: "postgres"
   dsn: "user=yang password=yang host=localhost port=5432 dbname=untitled sslmode=disable"
   reads:
     - "user=yang password=yang host=localhost port=5432 dbname=untitled sslmode=disable"

@@ -4,12 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"go-server/pkg/errors"
+	"go-server/pkg/trace"
 	"net/http"
 	httpURL "net/url"
 	"time"
-
-	"go-server/third_party/go-gin-api/errors"
-	"go-server/third_party/go-gin-api/trace"
 )
 
 const (
@@ -29,7 +28,7 @@ func Delete(url string, form httpURL.Values, options ...Option) (body []byte, er
 
 func withoutBody(method, url string, form httpURL.Values, options ...Option) (body []byte, err error) {
 	if url == "" {
-		return nil, errors.New("url required")
+		return nil, errors.New(errors.InternalError, "url required")
 	}
 
 	if len(form) > 0 {
@@ -172,10 +171,10 @@ func PatchJSON(url string, raw json.RawMessage, options ...Option) (body []byte,
 
 func withFormBody(method, url string, form httpURL.Values, options ...Option) (body []byte, err error) {
 	if url == "" {
-		return nil, errors.New("url required")
+		return nil, errors.New(errors.InternalError, "url required")
 	}
 	if len(form) == 0 {
-		return nil, errors.New("form required")
+		return nil, errors.New(errors.InternalError, "form required")
 	}
 
 	ts := time.Now()
@@ -284,10 +283,10 @@ func withFormBody(method, url string, form httpURL.Values, options ...Option) (b
 
 func withJSONBody(method, url string, raw json.RawMessage, options ...Option) (body []byte, err error) {
 	if url == "" {
-		return nil, errors.New("url required")
+		return nil, errors.New(errors.InternalError, "url required")
 	}
 	if len(raw) == 0 {
-		return nil, errors.New("raw required")
+		return nil, errors.New(errors.InternalError, "raw required")
 	}
 
 	ts := time.Now()

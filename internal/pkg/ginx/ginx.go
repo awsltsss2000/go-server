@@ -3,7 +3,7 @@ package ginx
 import (
 	"fmt"
 	"go-server/internal/app/schema"
-	"go-server/internal/pkg/errors"
+	"go-server/pkg/errors"
 	"net/http"
 	"strconv"
 
@@ -18,7 +18,7 @@ type Response struct {
 	Data interface{} `json:"data"`
 }
 
-func Result(c *gin.Context, code int, msg string, data interface{}) {
+func result(c *gin.Context, code int, msg string, data interface{}) {
 	if data == nil {
 		data = struct{}{}
 	}
@@ -31,11 +31,11 @@ func Result(c *gin.Context, code int, msg string, data interface{}) {
 }
 
 func Success(c *gin.Context, data interface{}) {
-	Result(c, 0, "", data)
+	result(c, 0, "", data)
 }
 
 func Fail(c *gin.Context, code int, msg string) {
-	Result(c, code, msg, nil)
+	result(c, code, msg, nil)
 }
 
 func ResError(c *gin.Context, err error) {
@@ -74,7 +74,7 @@ func ParseParamID(c *gin.Context, key string) uint64 {
 // ParseJSON Parse body json data to struct
 func ParseJSON(c *gin.Context, obj interface{}) error {
 	if err := c.ShouldBindJSON(obj); err != nil {
-		return errors.Wrap400ResponseError(fmt.Sprintf("Parse request json failed: %s", err.Error()))
+		return Wrap400ResponseError(fmt.Sprintf("Parse request json failed: %s", err.Error()))
 	}
 	return nil
 }
@@ -82,7 +82,7 @@ func ParseJSON(c *gin.Context, obj interface{}) error {
 // ParseQuery Parse query parameter to struct
 func ParseQuery(c *gin.Context, obj interface{}) error {
 	if err := c.ShouldBindQuery(obj); err != nil {
-		return errors.Wrap400ResponseError(fmt.Sprintf("Parse request query failed: %s", err.Error()))
+		return Wrap400ResponseError(fmt.Sprintf("Parse request query failed: %s", err.Error()))
 	}
 	return nil
 }
@@ -90,7 +90,7 @@ func ParseQuery(c *gin.Context, obj interface{}) error {
 // ParseForm Parse body form data to struct
 func ParseForm(c *gin.Context, obj interface{}) error {
 	if err := c.ShouldBindWith(obj, binding.Form); err != nil {
-		return errors.Wrap400ResponseError(fmt.Sprintf("Parse request form failed: %s", err.Error()))
+		return Wrap400ResponseError(fmt.Sprintf("Parse request form failed: %s", err.Error()))
 	}
 	return nil
 }

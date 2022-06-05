@@ -25,7 +25,7 @@ func Init() {
 		TransRepo: transRepo,
 		UserRepo:  userRepo,
 	}
-	userAPI := &api.UserAPi{UserSrv: userSrv}
+	userAPI := &api.UserApi{UserSrv: userSrv}
 	r := &router.Router{UserApi: userAPI}
 
 	engine := InitGin(r)

@@ -9,11 +9,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type UserAPi struct {
+type UserApi struct {
 	UserSrv *service.UserSrv
 }
 
-func (u *UserAPi) List(c *gin.Context) {
+func (u *UserApi) List(c *gin.Context) {
 	params := new(schema.UserQueryParam)
 	if err := ginx.ParseQuery(c, params); err != nil {
 		ginx.ResError(c, err)
@@ -35,7 +35,7 @@ func (u *UserAPi) List(c *gin.Context) {
 	ginx.ResPage(c, result.Data, result.PageResult)
 }
 
-func (u *UserAPi) Retrieve(c *gin.Context) {
+func (u *UserApi) Retrieve(c *gin.Context) {
 	userId := ginx.ParseParamID(c, "userId")
 	item, err := u.UserSrv.Retrieve(c, userId)
 	if err != nil {
@@ -46,7 +46,7 @@ func (u *UserAPi) Retrieve(c *gin.Context) {
 	ginx.Success(c, item)
 }
 
-func (u *UserAPi) Create(c *gin.Context) {
+func (u *UserApi) Create(c *gin.Context) {
 	item := new(schema.User)
 	if err := ginx.ParseJSON(c, item); err != nil {
 		ginx.ResError(c, err)
@@ -61,7 +61,7 @@ func (u *UserAPi) Create(c *gin.Context) {
 	ginx.Success(c, result)
 }
 
-func (u *UserAPi) BulkCreate(c *gin.Context) {
+func (u *UserApi) BulkCreate(c *gin.Context) {
 	item := new(schema.Users)
 	if err := ginx.ParseJSON(c, item); err != nil {
 		ginx.ResError(c, err)
@@ -76,7 +76,7 @@ func (u *UserAPi) BulkCreate(c *gin.Context) {
 	ginx.Success(c, result)
 }
 
-func (u *UserAPi) Update(c *gin.Context) {
+func (u *UserApi) Update(c *gin.Context) {
 	userId := ginx.ParseParamID(c, "userId")
 	item := new(schema.User)
 	if err := ginx.ParseJSON(c, item); err != nil {
@@ -92,7 +92,7 @@ func (u *UserAPi) Update(c *gin.Context) {
 	ginx.Success(c, result)
 }
 
-func (u *UserAPi) Delete(c *gin.Context) {
+func (u *UserApi) Delete(c *gin.Context) {
 	userId := ginx.ParseParamID(c, "userId")
 	err := u.UserSrv.Delete(c, userId)
 	if err != nil {

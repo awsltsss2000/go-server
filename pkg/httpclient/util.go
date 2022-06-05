@@ -4,12 +4,11 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
+	"go-server/pkg/trace"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"time"
-
-	"go-server/third_party/go-gin-api/trace"
 
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
