@@ -1,7 +1,7 @@
 package httpclient
 
 import (
-	trace2 "go-server/pkg/trace"
+	"go-server/pkg/trace"
 	"sync"
 	"time"
 
@@ -27,8 +27,8 @@ type Option func(*option)
 type option struct {
 	ttl         time.Duration
 	header      map[string][]string
-	trace       *trace2.Trace
-	dialog      *trace2.Dialog
+	trace       *trace.Trace
+	dialog      *trace.Dialog
 	logger      *zap.Logger
 	retryTimes  int
 	retryDelay  time.Duration
@@ -87,11 +87,11 @@ func WithHeaders(headers map[string]string) Option {
 }
 
 // WithTrace 设置trace信息
-func WithTrace(t trace2.T) Option {
+func WithTrace(t trace.T) Option {
 	return func(opt *option) {
 		if t != nil {
-			opt.trace = t.(*trace2.Trace)
-			opt.dialog = new(trace2.Dialog)
+			opt.trace = t.(*trace.Trace)
+			opt.dialog = new(trace.Dialog)
 		}
 	}
 }
