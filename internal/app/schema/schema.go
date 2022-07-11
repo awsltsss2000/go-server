@@ -1,15 +1,15 @@
 package schema
 
-type ListResult struct {
-	List       interface{}       `json:"list"`
-	Pagination *PaginationResult `json:"pagination,omitempty"`
-}
-
-type PaginationResult struct {
-	Total    int64 `json:"total"`
-	Current  int   `json:"current"`
-	PageSize int   `json:"page_size"`
-}
+// type ListResult struct {
+// 	List       interface{}       `json:"list"`
+// 	Pagination *PaginationResult `json:"pagination,omitempty"`
+// }
+//
+// type PaginationResult struct {
+// 	Total    int64 `json:"total"`
+// 	Current  int   `json:"current"`
+// 	PageSize int   `json:"page_size"`
+// }
 
 type PaginationParam struct {
 	Pagination bool `form:"-"`

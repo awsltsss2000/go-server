@@ -2,7 +2,6 @@ package ginx
 
 import (
 	"fmt"
-	"go-server/internal/app/schema"
 	"go-server/pkg/errors"
 	"net/http"
 	"strconv"
@@ -49,12 +48,12 @@ func ResError(c *gin.Context, err error) {
 
 // ResList Response data with list object
 func ResList(c *gin.Context, v interface{}) {
-	Success(c, schema.ListResult{List: v})
+	Success(c, ListResult{List: v})
 }
 
 // ResPage Response pagination data object
-func ResPage(c *gin.Context, v interface{}, pr *schema.PaginationResult) {
-	list := schema.ListResult{
+func ResPage(c *gin.Context, v interface{}, pr *PaginationResult) {
+	list := ListResult{
 		List:       v,
 		Pagination: pr,
 	}

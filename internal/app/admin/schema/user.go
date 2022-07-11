@@ -3,6 +3,7 @@ package schema
 import (
 	"encoding/json"
 	"go-server/internal/app/schema"
+	"go-server/internal/pkg/ginx"
 	"go-server/pkg/time"
 )
 
@@ -43,7 +44,7 @@ type UserQueryOptions struct {
 
 type UserQueryResult struct {
 	Data       Users
-	PageResult *schema.PaginationResult
+	PageResult *ginx.PaginationResult
 }
 
 // Users 用户对象列表

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go-server/internal/app/schema"
 	"go-server/internal/pkg/contextx"
+	"go-server/internal/pkg/ginx"
 	"strings"
 	"time"
 
@@ -45,14 +46,14 @@ func ExecTrans(ctx context.Context, db *gorm.DB, fn TransFunc) error {
 	return transModel.Exec(ctx, fn)
 }
 
-func WrapPageQuery(ctx context.Context, db *gorm.DB, pp schema.PaginationParam, out interface{}) (*schema.PaginationResult, error) {
+func WrapPageQuery(ctx context.Context, db *gorm.DB, pp schema.PaginationParam, out interface{}) (*ginx.PaginationResult, error) {
 	if pp.OnlyCount {
 		var count int64
 		err := db.Count(&count).Error
 		if err != nil {
 			return nil, err
 		}
-		return &schema.PaginationResult{Total: count}, nil
+		return &ginx.PaginationResult{Total: count}, nil
 	} else if !pp.Pagination {
 		err := db.Find(out).Error
 		return nil, err
@@ -63,7 +64,7 @@ func WrapPageQuery(ctx context.Context, db *gorm.DB, pp schema.PaginationParam, 
 		return nil, err
 	}
 
-	return &schema.PaginationResult{
+	return &ginx.PaginationResult{
 		Total:    total,
 		Current:  pp.GetCurrent(),
 		PageSize: pp.GetPageSize(),
